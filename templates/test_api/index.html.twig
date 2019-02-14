@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TestApiController!{% endblock %}
+
+{% block body %}
+
+
+<div class="example-wrapper">
+
+{% if pokemons is defined  %}
+    <h1> Pokémons </h1>
+    <table>
+        <tr>
+        <td><h1> ID </h1></td>
+        <td><h1> Nom </h1></td>
+        </tr>
+            {% for pokemon in pokemons %}
+            <tr>
+                <td> {{ pokemon.id }}  </td>
+                <td> {{ pokemon.nom|e }} </td>
+            </tr>
+            {% endfor %}
+    </table>    
+{% endif %}
+
+{% if status is defined  %}
+
+{% if status == 201 %}
+    <h1> Pokemon resource created </h1>
+{% elseif status == 400 %}  
+    <h1>Invalid input </h1>
+{% elseif status == 404 %}   
+    <h1>Resource notfound </h1>
+{% elseif status == 204 %} 
+   <h1>Pokemon resource deleted</h1>
+{% endif %}
+
+{% endif %}
+</div>
+{% endblock %}
