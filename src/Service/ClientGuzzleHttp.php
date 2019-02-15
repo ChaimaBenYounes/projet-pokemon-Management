@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\RequestOptions;
 
 class ClientGuzzleHttp
 {
@@ -16,8 +17,18 @@ class ClientGuzzleHttp
         ]);
     }
 
-    public function getClientGuzzleHttp()
+    public function getAllPokemon()
     {
-        return $this->client;
+        $response = $this->client->request('GET', 'pokemon');
+        $response = json_decode($response->getBody()->getContents(), true);
+        
+        return $response['hydra:member'];
     }
+
+    public function postPokemon($arraybody)
+    {
+        $response = $this->client->request('POST', 'pokemon', [RequestOptions::JSON => $arraybody ]);
+        return  $response->getStatusCode();
+    }
+
 }
