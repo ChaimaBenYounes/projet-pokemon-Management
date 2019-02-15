@@ -24,9 +24,10 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
-    App\Service\ClientGuzzleHttp:
+    App\Service\ClientGuzzleHttp: 
         arguments:
             $base_uri: '%base_uri%'
-
+            
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    

@@ -29,10 +29,11 @@
                         <div class="bs-pricing-table-two text-center">
                         {% if pokemons is defined  %}
                             {% for pokemon in pokemons %}
+                           
                             <div class="col-md-4 col-sm-6 col-xs-12">
                                 <div class="bs-pricing-item xs-last-border">
                                     <div class="bs-icon">
-                                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{ pokemon.id }}.png" alt="{{ pokemon.id }}" />
+                                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{ loop.index }}.png" alt="{{ loop.index }}" />
                                     </div>
                                     <div class="head ">
                                         <div class="price-title">
@@ -41,12 +42,12 @@
                                         </div>
                                         <div class="price">
                                             <h2>{{ pokemon.nom|e }}</h2>
-                                            <h1><sup>$</sup>{{ pokemon.id }}<small>/mo</small></h1>
+                                            <h1><sup>$</sup>{{ loop.index }}<small>/mo</small></h1>
                                         </div>
                                     </div>
 
                                     <ul class="text-uppercase">
-                                        <li><strong>{{ pokemon.id }}</strong> Karry</li>
+                                        <li><strong>{{ loop.index }}</strong> Karry</li>
                                         <li><strong>100</strong> Pokemon Bank</li>
                                         <li><strong>10%</strong> Catch Rate</li>
                                     </ul>

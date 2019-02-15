@@ -36,21 +36,6 @@ class TestApiController extends AbstractController
             'status' =>  $this->clientGuzzleHttp->postPokemon($arraybody),
         ]);
     }
-
-     /**
-     * @Route("/pokemon/post/{id}", name="api-pokemon-delete")
-     */
-    public function deletePokemon()
-    {
-       /*
-       $response = $this->client->request('Delete', 'pokemon', [RequestOptions::JSON => ['nom' => 'namepokemon'] ]);
-    
-        return $this->render('test_api/index.html.twig', [
-            'status' =>  $response->getStatusCode(),
-        ]);
-        */
-    }
-
 }
 
 
