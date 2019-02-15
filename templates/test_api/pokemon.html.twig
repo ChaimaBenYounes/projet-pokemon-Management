@@ -1,0 +1,65 @@
+
+
+{%  extends 'base.html.twig' %}
+{%  block body %}
+        <section  class="jumbotron text-center">
+            <div class="container">
+                <h1> Hello pokemon</h1> 
+                <p>Pokemon Pricing table.</p> 
+                    {% if status is defined  %}
+                        {% if status == 201 %}
+                            <h2> Pokemon resource created </h2>
+                        {% elseif status == 400 %}  
+                            <h2>Invalid input </h2>
+                        {% elseif status == 404 %}   
+                            <h2>Resource notfound </h2>
+                        {% elseif status == 204 %} 
+                        <h2>Pokemon resource deleted</h2>
+                        {% endif %}
+                    {% endif %}
+                <!--<div class="btn btn-info btn-large">Download </div>-->
+            </div>
+        </section>
+
+        <section id="bs-pricing" class="bs-pricing roomy-50 p-top-100 bg-white fix">
+            <div class="container">
+                <div class="col-md-12">
+                    <div class="row">
+                    
+                        <div class="bs-pricing-table-two text-center">
+                        {% if pokemons is defined  %}
+                            {% for pokemon in pokemons %}
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="bs-pricing-item xs-last-border">
+                                    <div class="bs-icon">
+                                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{ pokemon.id }}.png" alt="{{ pokemon.id }}" />
+                                    </div>
+                                    <div class="head ">
+                                        <div class="price-title">
+                                            <h2 class="text-uppercase">-</h2>
+                                            <div class="separator"></div>
+                                        </div>
+                                        <div class="price">
+                                            <h2>{{ pokemon.nom|e }}</h2>
+                                            <h1><sup>$</sup>{{ pokemon.id }}<small>/mo</small></h1>
+                                        </div>
+                                    </div>
+
+                                    <ul class="text-uppercase">
+                                        <li><strong>{{ pokemon.id }}</strong> Karry</li>
+                                        <li><strong>100</strong> Pokemon Bank</li>
+                                        <li><strong>10%</strong> Catch Rate</li>
+                                    </ul>
+                                    <a href="" class="btn btn-primary text-uppercase">Purchase Now</a>
+                                </div>
+                            </div><!-- End col-md-4 -->
+                            {% endfor %}
+                         {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+{% endblock %}
+ 

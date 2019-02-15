@@ -4,20 +4,18 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
+use App\Service\ClientGuzzleHttp;
+
 class TestApiController extends AbstractController
 {
-    private $client; 
+    private $clientGuzzleHttp;
 
-    public function __construct(){
-
-        $this->client = new Client([
-            'base_uri' => 'http://127.0.0.1:8000/api/',
-            'timeout'  => 2.0,
-        ]);
+    public function __construct(ClientGuzzleHttp $clientGuzzleHttp)
+    {
+        $this->clientGuzzleHttp = $clientGuzzleHttp;
     }
 
     /**
@@ -25,10 +23,10 @@ class TestApiController extends AbstractController
      */
     public function getAllPokemon()
     {
-        $response = $this->client->request('GET', 'pokemon');
+        $response = $this->clientGuzzleHttp->getClientGuzzleHttp()->request('GET', 'pokemon');
         $response = json_decode($response->getBody()->getContents(), true);
         
-        return $this->render('test_api/index.html.twig', [
+        return $this->render('test_api/pokemon.html.twig', [
             'pokemons' =>  $response['hydra:member'],
         ]);
     }

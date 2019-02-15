@@ -1,12 +1,36 @@
 <!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <html>
     <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <meta charset="utf-8">
+        <title>{% block title %}Pokemon Pricing Table{% endblock %}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/png" href="favicon.ico">
+        {% block stylesheets %}
+         <!-- Google Font link -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+         <!--Theme custom css -->
+        <link rel="stylesheet" href="{{ asset('pokemon/pokemon-pricing-table.css') }}" >
+        {% endblock %}
     </head>
     <body>
         {% block body %}{% endblock %}
+        <footer id="footer" class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="copyright text-center">
+                        <p class="wow fadeInRight">Made with <i class="fa fa-heart"></i> by <a href="http://bootstrapthemes.co">Bootstrap Themes</a>2016. All Rights Reserved</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- JS includes -->
         {% block javascripts %}{% endblock %}
     </body>
 </html>
