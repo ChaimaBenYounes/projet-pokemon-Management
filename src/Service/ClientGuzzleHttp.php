@@ -13,6 +13,10 @@ class ClientGuzzleHttp
     private $client; 
     private $serializer;
 
+    /**
+     * ClientGuzzleHttp constructor.
+     * @param $base_uri
+     */
     public function __construct($base_uri)
     {
         $this->client = new Client(['base_uri' => $base_uri, 'timeout'  => 2.0 ]);
@@ -22,14 +26,27 @@ class ClientGuzzleHttp
             [new GetSetMethodNormalizer(), new ArrayDenormalizer()],
             [new JsonEncoder()]
         );
-
     }
 
+    /**
+     * @return array|null
+     */
     public function getAllPokemon()
     {
-        $response = $this->client->request('GET', 'pokemon');
-        $responseArray = json_decode($response->getBody()->getContents(), true)['hydra:member'];
-        $oPokemon = $this->serializer->denormalize($responseArray, 'App\Entity\Pokemon[]', 'json');
+        $oPokemon = [];
+
+        try {
+            $response = $this->client->request('GET', 'pokemon');
+            $oPokemon = $this->serializer->denormalize(
+                json_decode($response->getBody()->getContents(), true)['hydra:member'],
+                'App\Entity\Pokemon[]',
+                'json'
+            );
+        } catch (\Exception $ex) {
+            //log some error here
+            return null;
+        }
+
         return $oPokemon;
     }
 

@@ -21,6 +21,9 @@ class TestApiController extends AbstractController
      */
     public function getAllPokemon()
     {
+        /*if (!$pokemons = $this->clientGuzzleHttp->getAllPokemon()) {
+            return null;
+        }*/
         return $this->render('test_api/pokemon.html.twig', [
             'pokemons' =>  $this->clientGuzzleHttp->getAllPokemon(),
         ]);
