@@ -7,7 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 use App\Service\ClientGuzzleHttp;
 
-class TestApiController extends AbstractController
+class PokemonController extends AbstractController
 {
     private $clientGuzzleHttp;
 
@@ -24,7 +24,7 @@ class TestApiController extends AbstractController
         /*if (!$pokemons = $this->clientGuzzleHttp->getAllPokemon()) {
             return null;
         }*/
-        return $this->render('test_api/pokemon.html.twig', [
+        return $this->render('api/pokemon.html.twig', [
             'pokemons' =>  $this->clientGuzzleHttp->getAllPokemon(),
         ]);
     }
@@ -35,7 +35,7 @@ class TestApiController extends AbstractController
     public function postPokemon()
     {
         $arraybody = ['nom' => 'pokemon1'];
-        return $this->render('test_api/index.html.twig', [
+        return $this->render('api/index.html.twig', [
             'status' =>  $this->clientGuzzleHttp->postPokemon($arraybody),
         ]);
     }
