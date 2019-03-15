@@ -21,12 +21,6 @@ class ClientGuzzleHttp
     {
         $this->client = new Client(['base_uri' => $base_uri, 'timeout'  => 2.0 ]);
 
-
-        /*dd($this->client->request('POST', 'tokens', [RequestOptions::FORM_PARAMS =>
-            ['email' => 'users_0@test.com',
-                'password' => 'pwd123']
-        ]));*/
-       
         //https://symfony.com/doc/current/components/serializer.html
         $this->serializer = new Serializer(
             [new GetSetMethodNormalizer(), new ArrayDenormalizer()],
@@ -34,8 +28,11 @@ class ClientGuzzleHttp
         );
     }
 
-    public function getTokenFromApi(){
-
+    /**
+     * @return mixed
+     */
+    public function getTokenFromApi()
+    {
         $response = $this->client->request('POST', 'tokens', [RequestOptions::FORM_PARAMS =>
             ['email' => 'users_0@test.com',
                 'password' => 'pwd123']
@@ -55,7 +52,11 @@ class ClientGuzzleHttp
         $oPokemon = [];
 
         try {
-            $response = $this->client->request('GET', 'pokemon');
+            $response = $this->client->request('GET', 'pokemon',[
+                RequestOptions::HEADERS => [
+                    'Authorization' => 'Bearer '.$this->getTokenFromApi()
+                ]
+            ]);
 
             $oPokemon = $this->serializer->denormalize(
                 json_decode($response->getBody()->getContents(), true)['hydra:member'],
@@ -66,7 +67,7 @@ class ClientGuzzleHttp
             //log some error here
             return null;
         }
-        dd($oPokemon);
+
         return $oPokemon;
     }
 

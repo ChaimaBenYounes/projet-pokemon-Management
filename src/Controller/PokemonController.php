@@ -17,14 +17,6 @@ class PokemonController extends AbstractController
     }
 
     /**
-     * @Route("/token", name="api-pokemon-get-token")
-     */
-    public function getTokens(){
-        $response = $this->clientGuzzleHttp->getTokenFromApi();
-        dd($response);
-    }
-
-    /**
      * @Route("/pokemon", name="api-pokemon")
      */
     public function getAllPokemon()
